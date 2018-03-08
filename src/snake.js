@@ -11,8 +11,8 @@ export default class Snake extends Component {
       top:20,
       left:100
     },
-    i:"",
-    isRunning: "pause"
+    interval:'',
+    isRunning: 'pause'
   }
   componentWillMount(){
   }
@@ -37,7 +37,6 @@ export default class Snake extends Component {
         default:
           this.go()
       }
-      
     }.bind(this))
 
     this.go()
@@ -48,18 +47,18 @@ export default class Snake extends Component {
     }.bind(this), 1000)
 
     this.setState({
-      i: interval
+      interval: interval
     })
   }
   pause(){
-    if(this.state.isRunning === "pause") {
+    if(this.state.isRunning === 'pause') {
       console.log(this.state.isRunning)
-      let  i = this.state.i;
-      window.clearInterval(i);
-      this.setState({isRunning:"start"});
+      let  interval = this.state.interval;
+      window.clearInterval(interval);
+      this.setState({isRunning:'start'});
     }else{
       this.go()
-      this.setState({isRunning:"pause"});
+      this.setState({isRunning:'pause'});
     }
   }
   move = (direct) => {
