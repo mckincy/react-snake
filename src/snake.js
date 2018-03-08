@@ -15,8 +15,6 @@ export default class Snake extends Component {
     isRunning: 'pause'
   }
   componentWillMount(){
-  }
-  componentDidMount(){
     this.keyEvents()
   }
   keyEvents = () => {
