@@ -69,8 +69,10 @@ export default class Snake extends Component {
           left: snakeNodes[0].left,
           top: snakeNodes[0].top - 20
         }
-        snakeNodes.pop()
-        snakeNodes.unshift(head)
+        snakeNodes = [
+          head,
+          ...this.state.snakeNodes.slice(0, this.state.snakeNodes.length - 1)
+        ]
         this.setState({
           direct: direct,
           snakeNodes: snakeNodes
@@ -82,8 +84,10 @@ export default class Snake extends Component {
           left: this.state.snakeNodes[0].left + 20,
           top: this.state.snakeNodes[0].top
         }
-        snakeNodes.unshift(head)
-        snakeNodes.length -= 1
+        snakeNodes = [
+          head,
+          ...this.state.snakeNodes.slice(0, this.state.snakeNodes.length - 1)
+        ]
         this.setState({
           direct: direct,
           snakeNodes: snakeNodes
@@ -95,8 +99,10 @@ export default class Snake extends Component {
           left: snakeNodes[0].left,
           top: snakeNodes[0].top + 20
         }
-        snakeNodes.pop()
-        snakeNodes.unshift(head)
+        snakeNodes = [
+          head,
+          ...this.state.snakeNodes.slice(0, this.state.snakeNodes.length - 1)
+        ]
         this.setState({
           direct: direct,
           snakeNodes: snakeNodes
@@ -108,8 +114,10 @@ export default class Snake extends Component {
           left: snakeNodes[0].left - 20,
           top: snakeNodes[0].top
         }
-        snakeNodes.pop()
-        snakeNodes.unshift(head)
+        snakeNodes = [
+          head,
+          ...this.state.snakeNodes.slice(0, this.state.snakeNodes.length - 1)
+        ]
         this.setState({
           direct: direct,
           snakeNodes: snakeNodes
