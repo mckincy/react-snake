@@ -33,7 +33,7 @@ export default class Snake extends Component {
           this.move('left')
           break
         default:
-          this.go()
+          return false
       }
     }.bind(this))
 
