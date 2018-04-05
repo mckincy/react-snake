@@ -27,5 +27,5 @@
   to { transform: rotate(360deg); }
 }
 .map {margin:20px auto;position:relative;width:500px;height:600px;background:url(./img/bg.png)}
-.snake-node {width:15px;height:15px;position:absolute;background:#333}
-#food {width:15px;height:15px;position:absolute;background: green;border-radius: 100px;}
+.snake-node {width:15px;height:15px;position:absolute;background:#ffc23d;border-radius:100px;}
+#food {width:15px;height:15px;position:absolute;background: #f53b3b;border-radius: 100px;}
