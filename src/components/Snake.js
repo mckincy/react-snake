@@ -7,14 +7,12 @@ export default class Snake extends Component {
       left:20
     }],
     direct: 'right',
-    food:{
-      top:20,
-      left:100
-    },
+    food:{},
     interval:'',
     isRunning: 'pause'
   }
-  componentWillMount(){
+  componentDidMount(){
+    this.resetFood()
     this.keyEvents()
   }
   keyEvents = () => {
@@ -48,9 +46,8 @@ export default class Snake extends Component {
       interval: interval
     })
   }
-  pause(){
+  pause = () => {
     if(this.state.isRunning === 'pause') {
-      console.log(this.state.isRunning)
       let  interval = this.state.interval;
       window.clearInterval(interval);
       this.setState({isRunning:'start'});
@@ -61,7 +58,6 @@ export default class Snake extends Component {
   }
   move = (direct) => {
     let snakeNodes = this.state.snakeNodes, head;
-    console.log(snakeNodes)
     let curPos = this.getCurPos()
     switch(direct){
       case 'up':
@@ -71,13 +67,12 @@ export default class Snake extends Component {
         }
         snakeNodes = [
           head,
-          ...this.state.snakeNodes.slice(0, this.state.snakeNodes.length - 1)
+          ...snakeNodes.slice(0, snakeNodes.length - 1)
         ]
         this.setState({
           direct: direct,
           snakeNodes: snakeNodes
         })
-        console.log(snakeNodes)
         break
       case 'right':
         head = {
@@ -86,7 +81,7 @@ export default class Snake extends Component {
         }
         snakeNodes = [
           head,
-          ...this.state.snakeNodes.slice(0, this.state.snakeNodes.length - 1)
+          ...snakeNodes.slice(0, snakeNodes.length - 1)
         ]
         this.setState({
           direct: direct,
@@ -101,13 +96,12 @@ export default class Snake extends Component {
         }
         snakeNodes = [
           head,
-          ...this.state.snakeNodes.slice(0, this.state.snakeNodes.length - 1)
+          ...snakeNodes.slice(0, snakeNodes.length - 1)
         ]
         this.setState({
           direct: direct,
           snakeNodes: snakeNodes
         })
-        console.log(snakeNodes)
         break
       case 'left':
         head = {
@@ -116,13 +110,12 @@ export default class Snake extends Component {
         }
         snakeNodes = [
           head,
-          ...this.state.snakeNodes.slice(0, this.state.snakeNodes.length - 1)
+          ...snakeNodes.slice(0, snakeNodes.length - 1)
         ]
         this.setState({
           direct: direct,
           snakeNodes: snakeNodes
         })
-        console.log(snakeNodes)
         break
       default:
         return
@@ -138,13 +131,26 @@ export default class Snake extends Component {
     this.setState({
       snakeNodes:[...c, curPos]
     })
+    this.resetFood()
   }
   getCurPos = () => ({
       left : this.state.snakeNodes[0].left,
       top : this.state.snakeNodes[0].top
   })
 
+  resetFood = () => {
+    let left = parseInt(Math.random() * 48) * 10,
+      top = parseInt(Math.random() * 58) * 10;
+    this.setState({
+      food: {
+        top: top % 20 === 0 ? top : top - 10,
+        left: left % 20 === 0 ? left : left - 10
+      }
+    }) 
+  }
+
   render(){
+    console.log(this.state.food)
     return (
       <div>
         <button id="startGame" onClick={this.pause.bind(this)}>{this.state.isRunning}</button>
