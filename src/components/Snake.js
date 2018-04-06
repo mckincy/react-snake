@@ -9,7 +9,8 @@ export default class Snake extends Component {
     direct: 'right',
     food:{},
     interval:'',
-    isRunning: 'pause'
+    isRunning: 'pause',
+    score: 0
   }
   componentDidMount(){
     this.resetFood()
@@ -132,6 +133,7 @@ export default class Snake extends Component {
       snakeNodes:[...c, curPos]
     })
     this.resetFood()
+    this.resetScore()
   }
   getCurPos = () => ({
       left : this.state.snakeNodes[0].left,
@@ -148,16 +150,23 @@ export default class Snake extends Component {
       }
     }) 
   }
-
+  resetScore = () => {
+    let score = this.state.score
+    this.setState({
+      score: score + 1
+    })
+  }
   render(){
-    console.log(this.state.food)
     return (
       <div>
-        <button id="startGame" onClick={this.pause.bind(this)}>{this.state.isRunning}</button>
+        <p>
+          <span className="score">{`Score: ${this.state.score}`}</span>
+          <button id="startGame" onClick={this.pause.bind(this)}>{this.state.isRunning}</button>
+        </p>
         <div className="map">
           {        
             this.state.snakeNodes.map((e, i) => {
-              return <div key={i} id={"node" + i} className="snake-node" style={{top:e.top,left:e.left}} />
+              return <div key={i} id={`node ${i}`} className="snake-node" style={{top:e.top,left:e.left}} />
             })
           }
           <div id="food" style={{top:this.state.food.top, left:this.state.food.left}}></div>
