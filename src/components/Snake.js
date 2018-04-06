@@ -172,7 +172,6 @@ export default class Snake extends Component {
             })
           }
           <Food top={this.state.food.top} left={this.state.food.left}/>
-          
         </div>   
       </div>
     )
