@@ -8,14 +8,16 @@ export default class Snake extends PureComponent {
       left:20
     }],
     direct: 'right',
-    food:{},
+    food:{
+      top:100,
+      left:100
+    },
     interval:'',
-    isRunning: 'pause',
+    isRunning: 'start',
     score: 0
   }
   componentDidMount(){
-    this.resetFood()
-    this.keyEvents()
+    this.init()
   }
 
   keyEvents = () => {
@@ -37,17 +39,20 @@ export default class Snake extends PureComponent {
           return false
       }
     }.bind(this))
-
-    this.go()
   }
   go = () => {
     let interval = setInterval(function(){
       this.move(this.state.direct)
-    }.bind(this), 1000)
+    }.bind(this), 500)
 
     this.setState({
       interval: interval
     })
+  }
+  init = () => {
+    let  interval = this.state.interval;
+    if(this.state.isRunning === 'start')  window.clearInterval(interval)
+    this.keyEvents()
   }
   pause = () => {
     if(this.state.isRunning === 'pause') {
