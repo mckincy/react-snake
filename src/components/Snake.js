@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Food from './Food'
 
 export default class Snake extends Component {
   state={
@@ -16,6 +17,7 @@ export default class Snake extends Component {
     this.resetFood()
     this.keyEvents()
   }
+
   keyEvents = () => {
     document.addEventListener('keydown', function(e){
       switch (e.keyCode) {
@@ -141,8 +143,8 @@ export default class Snake extends Component {
   })
 
   resetFood = () => {
-    let left = parseInt(Math.random() * 48) * 10,
-      top = parseInt(Math.random() * 58) * 10;
+    let left = parseInt(Math.random() * 48, 10) * 10,
+      top = parseInt(Math.random() * 58, 10) * 10;
     this.setState({
       food: {
         top: top % 20 === 0 ? top : top - 10,
@@ -169,7 +171,8 @@ export default class Snake extends Component {
               return <div key={i} id={`node ${i}`} className="snake-node" style={{top:e.top,left:e.left}} />
             })
           }
-          <div id="food" style={{top:this.state.food.top, left:this.state.food.left}}></div>
+          <Food top={this.state.food.top} left={this.state.food.left}/>
+          
         </div>   
       </div>
     )
