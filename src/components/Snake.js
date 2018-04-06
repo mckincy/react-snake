@@ -148,6 +148,7 @@ export default class Snake extends PureComponent {
         top:20,
         left:20
       }],
+      score: 0
     })
   }
   getCurPos = () => ({
