@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Food from './Food'
 
-export default class Snake extends Component {
+export default class Snake extends PureComponent {
   state={
     snakeNodes:[{
       top:20,
@@ -127,8 +127,12 @@ export default class Snake extends Component {
     if(curPos.left === this.state.food.left && curPos.top === this.state.food.top){
       this.grow(curPos, direct)
     }
+    console.log(curPos.left > 480)
+    if(curPos.left > 480 || curPos.top > 580 || curPos.left < 0 || curPos.top < 0) {
+      console.log(curPos)
+      this.dead()
+    }
   }
-
   grow = (curPos, direct) => {
     let c = this.state.snakeNodes 
     this.setState({
@@ -137,11 +141,19 @@ export default class Snake extends Component {
     this.resetFood()
     this.resetScore()
   }
+  dead = () => {
+    alert(`Your snake is dead!`)
+    this.setState({
+      snakeNodes:[{
+        top:20,
+        left:20
+      }],
+    })
+  }
   getCurPos = () => ({
       left : this.state.snakeNodes[0].left,
       top : this.state.snakeNodes[0].top
   })
-
   resetFood = () => {
     let left = parseInt(Math.random() * 48, 10) * 10,
       top = parseInt(Math.random() * 58, 10) * 10;
