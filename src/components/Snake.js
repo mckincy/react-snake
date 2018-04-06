@@ -153,8 +153,11 @@ export default class Snake extends PureComponent {
         top:20,
         left:20
       }],
-      score: 0
+      score: 0,
+      isRunning: 'start'
     })
+    let  interval = this.state.interval;
+      window.clearInterval(interval);
   }
   getCurPos = () => ({
       left : this.state.snakeNodes[0].left,
