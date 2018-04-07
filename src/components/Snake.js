@@ -43,7 +43,7 @@ export default class Snake extends PureComponent {
   go = () => {
     let interval = setInterval(function(){
       this.move(this.state.direct)
-    }.bind(this), 500)
+    }.bind(this), 100)
 
     this.setState({
       interval: interval
@@ -154,7 +154,8 @@ export default class Snake extends PureComponent {
         left:20
       }],
       score: 0,
-      isRunning: 'start'
+      isRunning: 'start',
+      direct: 'right'
     })
     let  interval = this.state.interval;
       window.clearInterval(interval);
